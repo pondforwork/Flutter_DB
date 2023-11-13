@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_database/screens/form_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -42,7 +43,11 @@ class _MyHomePageState extends State<MyHomePage> {
       
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
       
-        title: Text(widget.title),actions: [IconButton(onPressed: (){}, icon: const Icon(Icons.add))] ,
+        title: Text(widget.title),actions: [IconButton(onPressed: (){
+          Navigator.push(context, MaterialPageRoute(builder: (context){
+            return const FormScreen();
+          }));
+        }, icon: const Icon(Icons.add))] ,
       ),
       body:Container() // This trailing comma makes auto-formatting nicer for build methods.
     );
