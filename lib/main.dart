@@ -48,7 +48,7 @@ class _MyHomePageState extends State<MyHomePage> {
         ],
       ),
       body: ListView.builder(
-          itemCount: 10,
+          itemCount: 3,
           itemBuilder: (context, int index) {
             return const Card(
               elevation: 5,
@@ -56,6 +56,15 @@ class _MyHomePageState extends State<MyHomePage> {
                 10,
               ),
               child: ListTile(
+                leading: CircleAvatar(
+                  backgroundColor: Colors.red,
+                  child: FittedBox(
+                    child: Text(
+                      "500",
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ),
+                ),
                 title: Text("Menu"),
                 subtitle: Text("Date"),
               ),
