@@ -49,7 +49,7 @@ class _MyHomePageState extends State<MyHomePage> {
           }));
         }, icon: const Icon(Icons.add))] ,
       ),
-      body:Container() // This trailing comma makes auto-formatting nicer for build methods.
+    body: Container(),
     );
   }
 }
