@@ -13,7 +13,6 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-       
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
@@ -25,7 +24,6 @@ class MyApp extends StatelessWidget {
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
 
- 
   final String title;
 
   @override
@@ -33,29 +31,36 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
- 
-
   @override
   Widget build(BuildContext context) {
-   
     return Scaffold(
       appBar: AppBar(
-      
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-      
-        title: Text(widget.title),actions: [IconButton(onPressed: (){
-          Navigator.push(context, MaterialPageRoute(builder: (context){
-            return const FormScreen();
-          }));
-        }, icon: const Icon(Icons.add))] ,
+        title: Text(widget.title),
+        actions: [
+          IconButton(
+              onPressed: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  return const FormScreen();
+                }));
+              },
+              icon: const Icon(Icons.add))
+        ],
       ),
-    body: ListView.builder(itemBuilder: (context,int index){
-      return const Card(
-        elevation: 5,
-        margin: EdgeInsets.all(10,),
-        child: ListTile(title: Text("Menu")),
-      );
-    }),
+      body: ListView.builder(
+          itemCount: 10,
+          itemBuilder: (context, int index) {
+            return const Card(
+              elevation: 5,
+              margin: EdgeInsets.all(
+                10,
+              ),
+              child: ListTile(
+                title: Text("Menu"),
+                subtitle: Text("Date"),
+              ),
+            );
+          }),
     );
   }
 }
