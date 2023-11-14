@@ -49,7 +49,13 @@ class _MyHomePageState extends State<MyHomePage> {
           }));
         }, icon: const Icon(Icons.add))] ,
       ),
-    body: Container(),
+    body: ListView.builder(itemBuilder: (context,int index){
+      return const Card(
+        elevation: 5,
+        margin: EdgeInsets.all(10,),
+        child: ListTile(title: Text("Menu")),
+      );
+    }),
     );
   }
 }
