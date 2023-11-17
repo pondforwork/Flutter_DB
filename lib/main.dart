@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_database/models/Transaction.dart';
 import 'package:flutter_database/providers/transaction_provider.dart';
 import 'package:flutter_database/screens/form_screen.dart';
 import 'package:provider/provider.dart';
@@ -16,7 +17,7 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (context) {
           return TransactionProvider();
-        })
+        }),
       ],
       child: MaterialApp(
         title: 'Flutter Demo',
@@ -43,42 +44,47 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(widget.title),
-        actions: [
-          IconButton(
-              onPressed: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) {
-                  return const FormScreen();
-                }));
-              },
-              icon: const Icon(Icons.add))
-        ],
-      ),
-      body: ListView.builder(
-          itemCount: 3,
-          itemBuilder: (context, int index) {
-            return const Card(
-              elevation: 5,
-              margin: EdgeInsets.all(
-                10,
-              ),
-              child: ListTile(
-                leading: CircleAvatar(
-                  backgroundColor: Colors.red,
-                  child: FittedBox(
-                    child: Text(
-                      "500",
-                      style: TextStyle(color: Colors.white),
+        appBar: AppBar(
+          backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+          title: Text(widget.title),
+          actions: [
+            IconButton(
+                onPressed: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return const FormScreen();
+                  }));
+                },
+                icon: const Icon(Icons.add))
+          ],
+        ),
+        body:
+            Consumer(builder: ((context, TransactionProvider provider, child) {
+          return ListView.builder(
+            itemCount: provider.transactions.length,
+            itemBuilder: (context, int index) {
+              Transaction data = provider.transactions[index];
+              print(data.date);
+              return Card(
+                elevation: 5,
+                margin: EdgeInsets.all(10),
+                child: ListTile(
+                  leading: const CircleAvatar(
+                    backgroundColor: Colors.red,
+                    child: FittedBox(
+                      child: Text(
+                        "500", // You may want to replace this with data.title or another property from the Transaction object
+                        style: TextStyle(color: Colors.white),
+                      ),
                     ),
                   ),
+                  title: Text(data
+                      .title), // Replace this with the property you want to display as the title
+                  subtitle: Text(data.date
+                      .toString()), // Replace this with the property you want to display as the date
                 ),
-                title: Text("Menu"),
-                subtitle: Text("Date"),
-              ),
-            );
-          }),
-    );
+              );
+            },
+          );
+        })));
   }
 }
