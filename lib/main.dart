@@ -68,12 +68,13 @@ class _MyHomePageState extends State<MyHomePage> {
                 elevation: 5,
                 margin: EdgeInsets.all(10),
                 child: ListTile(
-                  leading: const CircleAvatar(
+                  leading: CircleAvatar(
                     backgroundColor: Colors.red,
                     child: FittedBox(
                       child: Text(
-                        "500", // You may want to replace this with data.title or another property from the Transaction object
-                        style: TextStyle(color: Colors.white),
+                        data.amount
+                            .toString(), // You may want to replace this with data.title or another property from the Transaction object
+                        style: const TextStyle(color: Colors.white),
                       ),
                     ),
                   ),
