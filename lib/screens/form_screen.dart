@@ -34,6 +34,20 @@ class FormScreen extends StatelessWidget {
               TextFormField(
                 decoration: const InputDecoration(labelText: "ใส่จำนวนเงิน"),
                 controller: transactionAmount,
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Please Input Amount';
+                  }
+                  // Parse the entered value as a double (assuming it's a numeric field)
+                  double? enteredValue = double.tryParse(value);
+
+                  // Check if the entered value is less than 0
+                  if (enteredValue != null && enteredValue < 0) {
+                    return 'Please enter a value greater than or equal to 0';
+                  }
+
+                  return null;
+                },
                 keyboardType: TextInputType.number,
               ),
               TextButton(
