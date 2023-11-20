@@ -5,6 +5,9 @@ class FormScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final TextEditingController transactionName = TextEditingController();
+    final TextEditingController transactionAmount = TextEditingController();
+
     return Scaffold(
         appBar: AppBar(
           title: const Text("หน้าที่ 2"),
@@ -17,12 +20,22 @@ class FormScreen extends StatelessWidget {
               children: [
                 TextFormField(
                   decoration: const InputDecoration(labelText: "ชื่อรายการ"),
+                  controller: transactionName,
                 ),
                 TextFormField(
                     decoration:
                         const InputDecoration(labelText: "ใส่จำนวนเงิน"),
+                    controller: transactionAmount,
                     keyboardType: TextInputType.number),
-                TextButton(onPressed: () {}, child: const Text("Add"))
+                TextButton(
+                    onPressed: () {
+                      String name = transactionName.text;
+                      String amount = transactionName.text;
+                      print(name);
+                      print(amount);
+                      Navigator.pop(context);
+                    },
+                    child: const Text("Add"))
               ],
             ),
           ),
