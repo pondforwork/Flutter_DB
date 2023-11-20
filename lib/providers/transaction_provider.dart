@@ -12,6 +12,7 @@ class TransactionProvider with ChangeNotifier {
   }
 
   addTranscation(Transaction statement){
-    return transactions.add(statement);
+    transactions.add(statement);
+    notifyListeners();
   }
 }

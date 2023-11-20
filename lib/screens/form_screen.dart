@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_database/providers/transaction_provider.dart';
+import 'package:provider/provider.dart';
+
+import '../models/Transaction.dart';
 
 class FormScreen extends StatelessWidget {
   const FormScreen({Key? key}) : super(key: key);
@@ -52,11 +56,15 @@ class FormScreen extends StatelessWidget {
               ),
               TextButton(
                 onPressed: () {
-                  if (formKey.currentState!.validate()) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('Processing Data')),
-                    );
-                  }
+                  Transaction statement = Transaction(
+                      title: transactionName.text,
+                      amount: double.parse(transactionAmount.text),
+                      date: DateTime.now());
+                  var provider =
+                      Provider.of<TransactionProvider>(context, listen: false);
+
+                  provider.addTranscation(statement);
+                  Navigator.pop(context);
                 },
                 child: const Text("Add"),
               ),
