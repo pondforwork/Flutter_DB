@@ -59,7 +59,11 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
         body:
             Consumer(builder: ((context, TransactionProvider provider, child) {
-          return ListView.builder(
+          var count = provider.transactions.length;
+          if(count <= 0){
+            return Center(child: const Text("ไม่พบข้อมูล"),);
+          }else{
+            return ListView.builder(
             itemCount: provider.transactions.length,
             itemBuilder: (context, int index) {
               Transaction data = provider.transactions[index];
@@ -86,6 +90,7 @@ class _MyHomePageState extends State<MyHomePage> {
               );
             },
           );
+          }
         })));
   }
 }
