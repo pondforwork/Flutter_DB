@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:flutter_database/database/transaction_db.dart';
 import 'package:flutter_database/models/transactions.dart';
 
 class TransactionProvider with ChangeNotifier {
@@ -11,8 +12,10 @@ class TransactionProvider with ChangeNotifier {
     return transactions;
   }
 
-  addTranscation(Transactions statement){
-    transactions.add(statement);
+  addTranscation(Transactions statement) async{
+    var db = await TransactionDB(dbName: "transactions.db").openDatabase();
+    print(db);
+    // transactions.add(statement);
     notifyListeners();
   }
 }
