@@ -25,6 +25,11 @@ class TransactionDB {
   InsertData(Transactions statement) async {
     var db = await this.openDatabase();
     var store = intMapStoreFactory.store("expense");
+    store.add(db, {
+      "title":statement.title,
+      "amount":statement.amount,
+      "date":statement.date
+    });
   }
 }
 
