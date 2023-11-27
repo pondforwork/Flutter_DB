@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:flutter_database/models/transactions.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
@@ -22,15 +21,14 @@ class TransactionDB {
   }
 
   //บันทึกข้อมูลลง Database
-  Future <int> InsertData(Transactions statement) async {
-    var db = await this.openDatabase();
+  Future<int> insertData(Transactions statement) async {
+    var db = await openDatabase();
     var store = intMapStoreFactory.store("expense");
     var keyID = store.add(db, {
       "title":statement.title,
       "amount":statement.amount,
       "date":statement.date.toIso8601String()
-    
-    });
+        });
     db.close();
     return keyID;
   }
