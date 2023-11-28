@@ -25,12 +25,29 @@ class TransactionDB {
     var db = await openDatabase();
     var store = intMapStoreFactory.store("expense");
     var keyID = store.add(db, {
-      "title":statement.title,
-      "amount":statement.amount,
-      "date":statement.date.toIso8601String()
-        });
+      "title": statement.title,
+      "amount": statement.amount,
+      "date": statement.date.toIso8601String()
+    });
     db.close();
     return keyID;
   }
-}
 
+  Future<List<Transactions>> loadAllData() async {
+    var db = await openDatabase();
+    var store = intMapStoreFactory.store("expense");
+    var snapshot = await store.find(db);
+
+    List<Transactions> transactionList = [];
+
+    for (var record in snapshot) {
+      transactionList.add(Transactions(
+        title: record["title"].toString(),
+        amount: double.parse(record["amount"].toString()),
+        date: DateTime.parse(record["date"].toString()),
+      ));
+    }
+
+    return transactionList;
+  }
+}
